@@ -1003,7 +1003,7 @@ containing a value of this type.
         public static final int button2=0x7f050052;
         public static final int button3=0x7f050053;
         public static final int button4=0x7f050044;
-        public static final int button5=0x7f05005d;
+        public static final int button5=0x7f050054;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int default_activity_button=0x7f050028;
@@ -1012,11 +1012,11 @@ containing a value of this type.
         public static final int dropdown=0x7f05000f;
         public static final int editText1=0x7f05003d;
         public static final int editText2=0x7f05003f;
-        public static final int editText3=0x7f050055;
+        public static final int editText3=0x7f050056;
         public static final int editText4=0x7f050041;
-        public static final int editText5=0x7f050058;
-        public static final int editText6=0x7f05005a;
-        public static final int editText7=0x7f05005c;
+        public static final int editText5=0x7f050059;
+        public static final int editText6=0x7f05005b;
+        public static final int editText7=0x7f05005d;
         public static final int edit_query=0x7f050030;
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
@@ -1061,12 +1061,12 @@ containing a value of this type.
         public static final int textView15=0x7f05004e;
         public static final int textView16=0x7f05004f;
         public static final int textView17=0x7f050050;
-        public static final int textView18=0x7f050054;
-        public static final int textView19=0x7f050056;
+        public static final int textView18=0x7f050055;
+        public static final int textView19=0x7f050057;
         public static final int textView2=0x7f05003e;
-        public static final int textView20=0x7f050057;
-        public static final int textView21=0x7f050059;
-        public static final int textView22=0x7f05005b;
+        public static final int textView20=0x7f050058;
+        public static final int textView21=0x7f05005a;
+        public static final int textView22=0x7f05005c;
         public static final int textView3=0x7f050040;
         public static final int textView4=0x7f050051;
         public static final int textView5=0x7f050043;
@@ -1135,7 +1135,8 @@ containing a value of this type.
         public static final int get_layout=0x7f03001a;
         public static final int option_layout=0x7f03001b;
         public static final int post_layout=0x7f03001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
+        public static final int sensor_concept=0x7f03001d;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
     }
     public static final class menu {
         public static final int get_query=0x7f0c0000;
@@ -1193,6 +1194,7 @@ containing a value of this type.
         public static final int title_activity_login=0x7f0a0010;
         public static final int title_activity_options=0x7f0a0011;
         public static final int title_activity_post_query=0x7f0a0013;
+        public static final int title_activity_sensor_concept=0x7f0a0015;
     }
     public static final class style {
         /** 

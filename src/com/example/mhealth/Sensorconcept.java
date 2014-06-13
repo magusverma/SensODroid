@@ -18,7 +18,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.os.Bundle;
 
 
 import android.content.pm.ActivityInfo;
@@ -34,13 +34,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Sensorconcept extends ActionBarActivity implements  OnClickListener{
+public class Sensorconcept extends ActionBarActivity {
 
 	EditText sensor;
 	Button b1;
 	String query;
 	LinearLayout main1;
-	String username,password,url;
+	String username;
+	String password;
+	String url;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,11 +51,15 @@ public class Sensorconcept extends ActionBarActivity implements  OnClickListener
         main1.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,android.view.ViewGroup.LayoutParams.MATCH_PARENT));
   	main1.setOrientation(LinearLayout.VERTICAL);
   	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-  	
+  	Bundle extras = getIntent().getExtras(); 
+  	username= extras.getString("uname");
+	password = extras.getString("pword");
+	
+	url=extras.getString("url");
      b1=new Button(this);
      b1.setText("Concepts");
      main1.addView(b1);
-     b1.setOnClickListener(this);
+     b1.setOnClickListener(listener2);
   	 sensor =new EditText(this);
   	 sensor.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT));     
       main1.addView(sensor);
@@ -130,13 +136,14 @@ private  class MyAsyncTask extends AsyncTask<String, String, String>{
 		  
 		  
 		  protected void onPostExecute(String params){
-			  
+			  try{
 			  if(params.equals("zero"))
 			  {
 				  Toast.makeText(getApplicationContext(),"No Concepts found.", Toast.LENGTH_LONG).show();
 			  }
 			  
 			  else{
+				
 			  
 	 String arrayString[] = params.split("\\*");
 	  //Toast.makeText(getApplicationContext(),params, Toast.LENGTH_LONG).show();
@@ -155,11 +162,14 @@ int size=params.length();
 	 }
 	  
 	
-	}		  
-	
-		
-		  }
 		  
+	
+			  }catch(Exception e)
+			  {
+				  Toast.makeText(getApplicationContext(),"Exception.", Toast.LENGTH_LONG).show();
+			  }
+		  }
+		  }	  
 		  
 		  protected void onProgressUpdate(Integer... progress){
 			    
@@ -182,29 +192,20 @@ int size=params.length();
 	
 	
 	
-	
+OnClickListener listener2 = new OnClickListener(){
 	
 	@Override
 public void onClick(View v)
 {
 	query=sensor.getText().toString();
 	
-	switch (v.getId())
-			{
-		case R.id.button1:
+	
 			
 	  new MyAsyncTask().execute(username,password,url,query);
 	
-	  
-	  
-	  
-	  break;
-				
-		
-			
-			}	
+	 
 		
 		
-}
+}};
 	
 }

@@ -49,7 +49,10 @@
             android:name="com.example.mhealth.NetworkUtil"
             android:label="@string/title_activity_get_input" >
         </activity>
-        
+         <activity
+            android:name="com.example.mhealth.Sensorconcept"
+            android:label="@string/title_activity_sensor_concept" >
+        </activity>
          <receiver android:name="MyBroadcastReceiver" >
             <intent-filter>
                 <action android:name="MyBroadcast" >

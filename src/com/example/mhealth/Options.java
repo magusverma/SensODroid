@@ -39,7 +39,7 @@ public class Options extends ActionBarActivity implements View.OnClickListener{
 		b1.setOnClickListener(this);
 		b2.setOnClickListener(this);
 		b3.setOnClickListener(this);
-		
+		b4.setOnClickListener(this);
 	}
 	
 	public void buttonClick1()
@@ -72,10 +72,10 @@ public class Options extends ActionBarActivity implements View.OnClickListener{
 	}
 	public void buttonClick4()
 	{
-		Intent intent1 = new Intent(this, Sensorconcept.class);
-	//	intent1.putExtra("uname",username );
-		//intent1.putExtra("pword",password);
-		//intent1.putExtra("url", url);
+		Intent intent1 = new Intent(this,Sensorconcept.class);
+		intent1.putExtra("uname",username );
+		intent1.putExtra("pword",password);
+		intent1.putExtra("url", url);
 		startActivity(intent1);
 	}
 	
@@ -96,6 +96,9 @@ public class Options extends ActionBarActivity implements View.OnClickListener{
 					
 			case R.id.button4:
 				buttonClick3();
+				break;
+			case R.id.button5:
+				buttonClick4();
 				break;
 					
 			
