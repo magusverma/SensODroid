@@ -43,26 +43,32 @@ public class Sensorconcept extends ActionBarActivity {
 	String username;
 	String password;
 	String url;
+	TextView S;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	
 		main1=new LinearLayout(this);
         main1.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,android.view.ViewGroup.LayoutParams.MATCH_PARENT));
-  	main1.setOrientation(LinearLayout.VERTICAL);
-  	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-  	Bundle extras = getIntent().getExtras(); 
-  	username= extras.getString("uname");
-	password = extras.getString("pword");
+  	 main1.setOrientation(LinearLayout.VERTICAL);
+  	 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+  	 Bundle extras = getIntent().getExtras(); 
+  	 username= extras.getString("uname");
+	 password = extras.getString("pword");
 	
-	url=extras.getString("url");
-     b1=new Button(this);
-     b1.setText("Concepts");
-     main1.addView(b1);
-     b1.setOnClickListener(listener2);
+	 url=extras.getString("url");
+     S=new TextView(this);
+      S.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));     
+      S.setText("Enter sensor Id");
+      main1.addView(S);
   	 sensor =new EditText(this);
   	 sensor.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT));     
       main1.addView(sensor);
+      b1=new Button(this);
+      b1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));   
+      b1.setText("Get Concepts");
+      b1.setOnClickListener(listener2);
+      main1.addView(b1);
       setContentView(main1);
 		
 		
@@ -136,19 +142,18 @@ private  class MyAsyncTask extends AsyncTask<String, String, String>{
 		  
 		  
 		  protected void onPostExecute(String params){
-			  try{
+			 
 			  if(params.equals("zero"))
 			  {
 				  Toast.makeText(getApplicationContext(),"No Concepts found.", Toast.LENGTH_LONG).show();
 			  }
 			  
 			  else{
-				
+			try{	
 			  
-	 String arrayString[] = params.split("\\*");
-	  //Toast.makeText(getApplicationContext(),params, Toast.LENGTH_LONG).show();
-		// System.out.println(((String) j1.get("display")).substring(0, 3)); 
-int size=params.length();
+	      String arrayString[] = params.split("\\*");
+	
+          int size=params.length();
 
 	 
 	 
@@ -175,21 +180,7 @@ int size=params.length();
 			    
 		  }
 		  }
-		  
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		 
 	
 	
 OnClickListener listener2 = new OnClickListener(){
