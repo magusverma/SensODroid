@@ -95,7 +95,7 @@ public class Sensorconcept extends ActionBarActivity {
 	public static String Httpget (String username, String password, String url,String query) throws ClientProtocolException, IOException
 	{
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(url+"/ws/rest/v1/sensor/scm"+query);
+		HttpGet httpGet = new HttpGet(url+"/ws/rest/v1/sensor/scm/"+query);
 		httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials(username, password),"UTF-8", false));
 		HttpResponse httpResponse = httpClient.execute(httpGet);
 		HttpEntity responseEntity = httpResponse.getEntity();
@@ -105,13 +105,19 @@ public class Sensorconcept extends ActionBarActivity {
 		         
     	} 
 	public static String JsonParse(String str) throws JSONException
-	{
+	{ 
+		String res=null;
 		JSONObject jo = new JSONObject(str);
-		JSONArray ja = jo.getJSONArray("results");
-			JSONObject j1= (JSONObject)ja.get(0);
-			String bla = (String)j1.get("sensor.getText().toString()");
-			return bla;
-		
+		// get n array from json object
+		JSONArray concept=(JSONArray)jo.get("concepts");
+		for(int i=0;i<concept.length();i++)
+		{ //System.out.println(concept.get(i));
+       JSONObject row=concept.getJSONObject(i);
+		res=row.getString("name");
+		res=res.concat("*");
+		}
+
+	return res;
 	}
 	
 private  class MyAsyncTask extends AsyncTask<String, String, String>{
@@ -151,7 +157,7 @@ private  class MyAsyncTask extends AsyncTask<String, String, String>{
 			  else{
 			try{	
 			  
-	      String arrayString[] = params.split("\\*");
+	      String arrayString[] = params.split("*");
 	
           int size=params.length();
 
