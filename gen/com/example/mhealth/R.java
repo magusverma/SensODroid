@@ -1139,11 +1139,13 @@ containing a value of this type.
         public static final int support_simple_spinner_dropdown_item=0x7f03001e;
     }
     public static final class menu {
-        public static final int get_query=0x7f0c0000;
-        public static final int login=0x7f0c0001;
-        public static final int main=0x7f0c0002;
-        public static final int options=0x7f0c0003;
-        public static final int post_query=0x7f0c0004;
+        public static final int create__sensor=0x7f0c0000;
+        public static final int create_sensor=0x7f0c0001;
+        public static final int get_query=0x7f0c0002;
+        public static final int login=0x7f0c0003;
+        public static final int main=0x7f0c0004;
+        public static final int options=0x7f0c0005;
+        public static final int post_query=0x7f0c0006;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1189,6 +1191,8 @@ containing a value of this type.
         public static final int action_settings=0x7f0a000f;
         public static final int app_name=0x7f0a000d;
         public static final int hello_world=0x7f0a000e;
+        public static final int title_activity_create__sensor=0x7f0a0017;
+        public static final int title_activity_create_sensor=0x7f0a0016;
         public static final int title_activity_get_input=0x7f0a0014;
         public static final int title_activity_get_query=0x7f0a0012;
         public static final int title_activity_login=0x7f0a0010;

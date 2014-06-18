@@ -126,7 +126,7 @@ private  class MyAsyncTask extends AsyncTask<String, String, String>{
 		  
 		  
 		  protected void onPostExecute(String params){
-			  
+			  Toast.makeText(getApplicationContext(), "Invalid credentials", Toast.LENGTH_LONG).show();
 			 if(params.equals("cred"))
 			 {
 				 Toast.makeText(getApplicationContext(), "Invalid credentials", Toast.LENGTH_LONG).show();

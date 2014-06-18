@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -45,28 +46,38 @@
             android:name="com.example.mhealth.GetInput"
             android:label="@string/title_activity_get_input" >
         </activity>
-         <activity
+        <activity
             android:name="com.example.mhealth.NetworkUtil"
             android:label="@string/title_activity_get_input" >
         </activity>
-         <activity
+        <activity
             android:name="com.example.mhealth.Sensorconcept"
             android:label="@string/title_activity_sensor_concept" >
         </activity>
-         <receiver android:name="MyBroadcastReceiver" >
+
+        <receiver android:name="com.example.mhealth.MyBroadcastReceiver" >
             <intent-filter>
                 <action android:name="MyBroadcast" >
-                    </action>
+                </action>
             </intent-filter>
         </receiver>
         <receiver
-            android:name="NetworkChangeReceiver"
+            android:name="com.example.mhealth.NetworkChangeReceiver"
             android:label="NetworkChangeReceiver" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.example.mhealth.CreateSensor"
+            android:label="@string/title_activity_create_sensor" >
+        </activity>
+        <activity
+            android:name="com.example.mhealth.Create_Sensor"
+            android:label="@string/title_activity_create__sensor" >
+        </activity>
     </application>
 
 </manifest>

@@ -4,9 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -18,9 +22,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.os.Bundle;
-
-
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,28 +37,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Sensorconcept extends ActionBarActivity {
+public class Sensorconcept extends ActionBarActivity implements View.OnClickListener {
 
-	EditText sensor;
+	EditText sensor,patient;
 	Button b1;
 	String query;
 	LinearLayout main1;
 	String username;
 	String password;
 	String url;
-	TextView S;
+	TextView S, S1;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	
 		main1=new LinearLayout(this);
-        main1.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,android.view.ViewGroup.LayoutParams.MATCH_PARENT));
-  	 main1.setOrientation(LinearLayout.VERTICAL);
+       main1.setOrientation(LinearLayout.VERTICAL);
   	 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
   	 Bundle extras = getIntent().getExtras(); 
   	 username= extras.getString("uname");
-	 password = extras.getString("pword");
-	
+	 password = extras.getString("pword");	
 	 url=extras.getString("url");
      S=new TextView(this);
       S.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));     
@@ -64,10 +65,17 @@ public class Sensorconcept extends ActionBarActivity {
   	 sensor =new EditText(this);
   	 sensor.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT));     
       main1.addView(sensor);
+      S1=new TextView(this);
+      S1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));     
+      S1.setText("Enter Patient Id");
+      main1.addView(S1);
+  	 patient =new EditText(this);
+  	 patient.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT));     
+      main1.addView(patient);
       b1=new Button(this);
       b1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));   
       b1.setText("Get Concepts");
-      b1.setOnClickListener(listener2);
+      b1.setOnClickListener(this);
       main1.addView(b1);
       setContentView(main1);
 		
@@ -104,26 +112,50 @@ public class Sensorconcept extends ActionBarActivity {
 		return str;  
 		         
     	} 
+	
 	public static String JsonParse(String str) throws JSONException
 	{ 
-		String res=null;
+		String res="";
 		JSONObject jo = new JSONObject(str);
-		// get n array from json object
-		JSONArray concept=(JSONArray)jo.get("concepts");
-		for(int i=0;i<concept.length();i++)
-		{ //System.out.println(concept.get(i));
-       JSONObject row=concept.getJSONObject(i);
-		res=row.getString("name");
-		res=res.concat("*");
-		}
+		JSONArray ja = jo.getJSONArray("concepts");
+		if (ja.length()==0)
+				{
+			
+			return "zero";
+				}
+		int len = ja.length();
+		System.out.println(len);
+		for(int i=0;i<len;i++)
+		{
+			JSONObject jo1 = (JSONObject) ja.get(i);
+			res= res + (String)jo1.get("display") +"*";
+			System.out.println(res);
 
-	return res;
+		}
+		
+		return res;
 	}
 	
+	
+	private class MyAsyncTask2 extends AsyncTask<String, String, String>
+	{
+
+		@Override
+		protected String doInBackground(String... params) {
+			// method for posting the readings 
+			return null;
+		}
+		
+		 protected void onPostExecute(String params){
+		 
+		 }
+		
+		
+	}
 private  class MyAsyncTask extends AsyncTask<String, String, String>{
 		
 		String res1,res2;
-		  @Override
+		  
 		  protected String doInBackground(String... params) {
 			  
 			   try {
@@ -148,37 +180,54 @@ private  class MyAsyncTask extends AsyncTask<String, String, String>{
 		  
 		  
 		  protected void onPostExecute(String params){
-			 
+			  int size;
+			  String arrayString[];
+			  //Toast.makeText(getApplicationContext(),params, Toast.LENGTH_LONG).show();
+			  Toast.makeText(getApplicationContext(),"PostExecute.", Toast.LENGTH_LONG).show();
+			  EditText ed;
+			List<EditText> allEds = new ArrayList<EditText>();
+			  Toast.makeText(getApplicationContext(),"PostExecute2.", Toast.LENGTH_LONG).show();
 			  if(params.equals("zero"))
 			  {
 				  Toast.makeText(getApplicationContext(),"No Concepts found.", Toast.LENGTH_LONG).show();
 			  }
 			  
 			  else{
-			try{	
-			  
-	      String arrayString[] = params.split("*");
-	
-          int size=params.length();
+				
+				 System.out.println("array string length");
+	      arrayString= params.split("\\*");
+	      System.out.print(arrayString[0]);
+	      System.out.print(arrayString[1]); 
+	      size=arrayString.length;
+          Toast.makeText(getApplicationContext(),size +"  ", Toast.LENGTH_LONG).show();
+          System.out.println("array string length"+size);
 
 	 
 	 
 	 for(int i=0;i<size;i++)
 	 {
-		 final TextView rowTextView = new TextView(Sensorconcept.this);
-		 final EditText rowedit = new EditText(Sensorconcept.this);
+		 Toast.makeText(getApplicationContext(),i+"  ", Toast.LENGTH_LONG).show();
+		 TextView rowTextView = new TextView(Sensorconcept.this);
 		 rowTextView.setText(arrayString[i]);
 		 main1.addView(rowTextView);
+	    ed = new EditText(Sensorconcept.this);
+	    allEds.add(ed);
+     ed.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
+	    main1.addView(ed);	 
+		
 		 
 	 }
-	  
-	
+	 
+	 String[] strings = new String[size];
+	 String fin = new String() ;
+	 for(int i=0; i < allEds.size(); i++){
+	     strings[i] = allEds.get(i).getText().toString();
+	     fin.concat(strings[i]+"*");
+	 }
+	 //new MyAsyncTask2().execute(username,password,url,fin);
 		  
 	
-			  }catch(Exception e)
-			  {
-				  Toast.makeText(getApplicationContext(),"Exception.", Toast.LENGTH_LONG).show();
-			  }
+			 
 		  }
 		  }	  
 		  
@@ -188,21 +237,13 @@ private  class MyAsyncTask extends AsyncTask<String, String, String>{
 		  }
 		 
 	
-	
-OnClickListener listener2 = new OnClickListener(){
-	
-	@Override
-public void onClick(View v)
-{
-	query=sensor.getText().toString();
-	
-	
-			
+
+@Override
+public void onClick(View v) {
+		query=sensor.getText().toString();	
 	  new MyAsyncTask().execute(username,password,url,query);
 	
-	 
-		
-		
-}};
+	
+}
 	
 }

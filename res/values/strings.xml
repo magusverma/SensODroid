@@ -8,7 +8,9 @@
     <string name="title_activity_options">Options</string>
     <string name="title_activity_get_query">GetQuery</string>
     <string name="title_activity_post_query">PostQuery</string>
-     <string name="title_activity_get_input">GetInput</string>
-     <string name="title_activity_sensor_concept">Sensorconcept</string>
+    <string name="title_activity_get_input">GetInput</string>
+    <string name="title_activity_sensor_concept">Sensorconcept</string>
+    <string name="title_activity_create_sensor">CreateSensor</string>
+    <string name="title_activity_create__sensor">Create_Sensor</string>
 
 </resources>
